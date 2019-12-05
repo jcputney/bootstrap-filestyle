@@ -34,12 +34,12 @@
 			if (value === true || value === false) {
 				this.options.disabled = value;
 				this.$element.prop('disabled', this.options.disabled);
-				this.$elementFilestyle.find('label').prop('disabled', this.options.disabled);
+				this.$elementFilestyle.find('.filestyle-button').prop('disabled', this.options.disabled);
 
 				if (this.options.disabled)
-					this.$elementFilestyle.find('label').css('opacity', '0.65');
+					this.$elementFilestyle.find('.filestyle-button').css('opacity', '0.65');
 				else
-					this.$elementFilestyle.find('label').css('opacity', '1');
+					this.$elementFilestyle.find('.filestyle-button').css('opacity', '1');
 			} else {
 				return this.options.disabled;
 			}
@@ -50,6 +50,14 @@
 				this.options.dragdrop = value;
 			} else {
 				return this.options.dragdrop;
+			}
+		},
+
+		useLabel : function(value) {
+			if (value === true || value === false) {
+				this.options.useLabel = value;
+			} else {
+				return this.options.useLabel;
 			}
 		},
 
@@ -105,7 +113,7 @@
 		size : function(value) {
 			if (value !== undefined) {
 				this.options.size = value;
-				var btn = this.$elementFilestyle.find('label'), input = this.$elementFilestyle.find('input');
+				var btn = this.$elementFilestyle.find('.filestyle-button'), input = this.$elementFilestyle.find('input');
 
 				btn.removeClass('btn-lg btn-sm');
 				input.removeClass('form-control-lg form-control-sm');
@@ -130,16 +138,25 @@
 		text : function(value) {
 			if (value !== undefined) {
 				this.options.text = value;
-				this.$elementFilestyle.find('label .text').html(this.options.text);
+				this.$elementFilestyle.find('.filestyle-button .text').html(this.options.text);
 			} else {
 				return this.options.text;
+			}
+		},		
+
+		inputTitle : function(value) {
+			if (value !== undefined) {
+				this.options.inputTitle = value;
+				this.$elementFilestyle.find('input').attr('title', value);
+			} else {
+				return this.options.inputTitle;
 			}
 		},
 		
 		btnClass : function(value) {
 			if (value !== undefined) {
 				this.options.btnClass = value;
-				this.$elementFilestyle.find('label').attr({
+				this.$elementFilestyle.find('.filestyle-button').attr({
 					'class' : 'btn ' + this.options.btnClass + ' btn-' + this.options.size
 				});
 			} else {
@@ -151,7 +168,7 @@
 			if (value === true) {
 				this.options.badge = value;
 				var files = this.pushNameFiles();
-				this.$elementFilestyle.find('label').append(' <span class="badge '+this.options.badgeName+'">' + files.length + '</span>');
+				this.$elementFilestyle.find('.filestyle-button').append(' <span class="badge '+this.options.badgeName+'">' + files.length + '</span>');
 			} else if (value === false) {
 				this.options.badge = value;
 				this.$elementFilestyle.find('.badge').remove();
@@ -181,7 +198,7 @@
 
 		htmlInput : function() {
 			if (this.options.input) {
-				return '<input type="text" class="form-control ' + (this.options.size == 'nr' ? '' : 'form-control-' + this.options.size) + '" placeholder="'+ this.options.placeholder +'" disabled> ';
+				return '<input type="text" class="form-control ' + (this.options.size == 'nr' ? '' : 'form-control-' + this.options.size) + '" placeholder="'+ this.options.placeholder + '" title="'+ this.options.inputTitle +'" disabled> ';
 			} else {
 				return '';
 			}
@@ -228,24 +245,24 @@
                 nextId++;
 			}
 
-			btn = '<span class="group-span-filestyle ' + (_self.options.input ? 'input-group-btn' : '') + '">' + 
-			  '<label for="' + id + '" style="margin-bottom: 0;" class="btn ' + _self.options.btnClass + ' ' +
+			btn = '<span class="group-span-filestyle ' + (_self.options.input ? (_self.options.buttonBefore ? 'input-group-prepend' : 'input-group-append') : '') + '">' + 
+			  (_self.options.useLabel ? '<label for="' + id + '"' : '<button type="button"') + ' style="margin-bottom: 0;" class="filestyle-button btn ' + _self.options.btnClass + ' ' +
 			(_self.options.size == 'nr' ? '' : 'btn-' + _self.options.size) + '" ' + 
 			(_self.options.disabled || _self.$element.attr('disabled') ? ' disabled="true"' : '') + '>' + 
 			_self.htmlIcon() + '<span class="buttonText">' + _self.options.text + '</span>' + 
-			  '</label>' + 
+			  (_self.options.useLabel ? '</label>' : '</button>') + 
 			  '</span>';
 			
 			html = _self.options.buttonBefore ? btn + _self.htmlInput() : _self.htmlInput() + btn;
 			_self.$elementFilestyle = $('<div class="bootstrap-filestyle input-group"><div name="filedrag"></div>' + html + '</div>');
 			_self.$elementFilestyle.find('.group-span-filestyle').attr('tabindex', "0").keypress(function(e) {
 			if (e.keyCode === 13 || e.charCode === 32) {
-				_self.$elementFilestyle.find('label').click();
+				_self.$elementFilestyle.find('.filestyle-button').click();
 					return false;
 				}
 			});
 
-			// hidding input file and add filestyle
+			// hiding input file and add filestyle
 			_self.$element.css({
 				'position' : 'absolute',
 				'clip' : 'rect(0px 0px 0px 0px)' // using 0px for work in IE8
@@ -266,9 +283,9 @@
 			if (_self.options.disabled || _self.$element.attr('disabled')) {
 				_self.$element.attr('disabled', 'true');
 				if (_self.options.disabled)
-					_self.$elementFilestyle.find('label').css('opacity', '0.65');
+					_self.$elementFilestyle.find('.filestyle-button').css('opacity', '0.65');
 				else
-					_self.$elementFilestyle.find('label').css('opacity', '1');
+					_self.$elementFilestyle.find('.filestyle-button').css('opacity', '1');
 			}
 
 			// Getting input file value
@@ -276,7 +293,7 @@
 				var files = _self.pushNameFiles();
 				if (_self.options.badge) {
 					if (_self.$elementFilestyle.find('.badge').length == 0) {
-						_self.$elementFilestyle.find('label').append(' <span class="badge '+_self.options.badgeName+'">' + files.length + '</span>');
+						_self.$elementFilestyle.find('.filestyle-button').append(' <span class="badge '+_self.options.badgeName+'">' + files.length + '</span>');
 					} else if (files.length == 0) {
 						_self.$elementFilestyle.find('.badge').remove();
 					} else {
@@ -292,7 +309,7 @@
 			// Check if browser is Firefox
 			if (window.navigator.userAgent.search(/firefox/i) > -1) {
 				// Simulating choose file for firefox
-				_self.$elementFilestyle.find('label').click(function() {
+				_self.$elementFilestyle.find('.filestyle-button').click(function() {
 					_self.$element.click();
 					return false;
 				});
@@ -338,7 +355,7 @@
 				                var files = _self.pushNameFiles();
 								if (_self.options.badge) {
 									if (_self.$elementFilestyle.find('.badge').length == 0) {
-										_self.$elementFilestyle.find('label').append(' <span class="badge '+_self.options.badgeName+'">' + files.length + '</span>');
+										_self.$elementFilestyle.find('.filestyle-button').append(' <span class="badge '+_self.options.badgeName+'">' + files.length + '</span>');
 									} else if (files.length == 0) {
 										_self.$elementFilestyle.find('.badge').remove();
 									} else {
@@ -391,8 +408,10 @@
 		'badgeName': 'badge-light',
 		'buttonBefore' : false,
 		'dragdrop' : true,
+		'useLabel' : true,
 		'disabled' : false,
 		'placeholder': '',
+		'inputTitle': '',
 		'onChange': function () {}
 	};
 
@@ -413,8 +432,10 @@
 				'btnClass' : $this.attr('data-btnClass'),
 				'badge' : $this.attr('data-badge') === 'true',
 				'dragdrop' : $this.attr('data-dragdrop') !== 'false',
+				'useLabel' : $this.attr('data-useLabel') !== 'false',
 				'badgeName' : $this.attr('data-badgeName'),
-				'placeholder': $this.attr('data-placeholder')
+				'placeholder': $this.attr('data-placeholder'),
+				'inputTitle': $this.attr('data-inputTitle')
 			};
 
 			$this.filestyle(options);
