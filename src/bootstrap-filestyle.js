@@ -4,7 +4,7 @@
  * github: https://github.com/jcputney/bootstrap-filestyle
  *
  * Copyright (c) 2017 Markus Vinicius da Silva Lima
- * Version 2.1.2
+ * Version 2.1.3
  * Licensed under the MIT license.
  */
 (function($) {
@@ -256,8 +256,8 @@
 			html = _self.options.buttonBefore ? btn + '<div name="filedrag"></div>' + _self.htmlInput() : _self.htmlInput() + '<div name="filedrag"></div>' + btn;
 			_self.$elementFilestyle = $('<div class="bootstrap-filestyle input-group">' + html + '</div>');
 			_self.$elementFilestyle.find('.group-span-filestyle').attr('tabindex', "0").keypress(function(e) {
-			if (e.keyCode === 13 || e.charCode === 32) {
-				_self.$elementFilestyle.find('.filestyle-button').click();
+				if (e.keyCode === 13 || e.charCode === 32) {
+					_self.$elementFilestyle.find('.filestyle-button').click();
 					return false;
 				}
 			});
@@ -268,7 +268,7 @@
 				'clip' : 'rect(0px 0px 0px 0px)' // using 0px for work in IE8
 			}).attr('tabindex', "-1").after(_self.$elementFilestyle);
 
-			_self.$elementFilestyle.find(_self.options.buttonBefore ? 'label' : ':input').css({
+			_self.$elementFilestyle.find(_self.options.buttonBefore ? '.filestyle-button' : ':input').css({
 				'border-top-left-radius': '.25rem',
 				'border-bottom-left-radius': '.25rem'
 			});
@@ -306,14 +306,10 @@
 				_self.options.onChange(files);
 			});
 
-			// Check if browser is Firefox
-			if (window.navigator.userAgent.search(/firefox/i) > -1) {
-				// Simulating choose file for firefox
-				_self.$elementFilestyle.find('.filestyle-button').click(function() {
-					_self.$element.click();
-					return false;
-				});
-			}
+			_self.$elementFilestyle.find('.filestyle-button').click(function() {
+				_self.$element.click();
+				return false;
+			});
 
 			/** DRAG AND DROP EVENTS **/
 			$(document)

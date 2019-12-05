@@ -1,5 +1,5 @@
 
-# [Bootstrap FileStyle v2.1.2](http://jcputney.github.io/bootstrap-filestyle/)
+# [Bootstrap FileStyle v2.1.3](http://jcputney.github.io/bootstrap-filestyle/)
 
 Bootstrap FileStyle is a quick and simple and beaultiful plugin to help style your form's file upload inputs using Bootstrap 4.
 
