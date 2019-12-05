@@ -253,8 +253,8 @@
 			  (_self.options.useLabel ? '</label>' : '</button>') + 
 			  '</span>';
 			
-			html = _self.options.buttonBefore ? btn + _self.htmlInput() : _self.htmlInput() + btn;
-			_self.$elementFilestyle = $('<div class="bootstrap-filestyle input-group"><div name="filedrag"></div>' + html + '</div>');
+			html = _self.options.buttonBefore ? btn + '<div name="filedrag"></div>' + _self.htmlInput() : _self.htmlInput() + '<div name="filedrag"></div>' + btn;
+			_self.$elementFilestyle = $('<div class="bootstrap-filestyle input-group">' + html + '</div>');
 			_self.$elementFilestyle.find('.group-span-filestyle').attr('tabindex', "0").keypress(function(e) {
 			if (e.keyCode === 13 || e.charCode === 32) {
 				_self.$elementFilestyle.find('.filestyle-button').click();
