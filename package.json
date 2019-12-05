@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-filestyle",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "description": "Bootstrap FileStyle is a quick and simple plugin to help style your form's file upload inputs using Bootstrap 4.",
   "main": "src/bootstrap-filestyle.js",
   "directories": {
@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/markusslima/bootstrap-filestyle.git"
+    "url": "git+https://github.com/jcputney/bootstrap-filestyle.git"
   },
   "keywords": [
     "bootstrap",
     "fileupload",
     "filestyle"
   ],
-  "author": "Markus Lima @markusslima",
+  "author": "Jonathan Putney @jcputney",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/markusslima/bootstrap-filestyle/issues"
+    "url": "https://github.com/jcputney/bootstrap-filestyle/issues"
   },
-  "homepage": "https://github.com/markusslima/bootstrap-filestyle#readme"
+  "homepage": "https://github.com/jcputney/bootstrap-filestyle#readme"
 }
