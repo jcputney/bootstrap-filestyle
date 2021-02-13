@@ -163,6 +163,14 @@
 				return this.options.btnClass;
 			}
 		},
+		
+		inputClass : function(value) {
+			if (value !== undefined) {
+				this.options.inputClass = value;
+			} else {
+				return this.options.inputClass;
+			}
+		},
 
 		badge : function(value) {
 			if (value === true) {
@@ -198,7 +206,7 @@
 
 		htmlInput : function() {
 			if (this.options.input) {
-				return '<input type="text" class="form-control ' + (this.options.size == 'nr' ? '' : 'form-control-' + this.options.size) + '" placeholder="'+ this.options.placeholder + '" title="'+ this.options.inputTitle +'" disabled> ';
+				return '<input type="text" class="form-control ' + (this.options.size == 'nr' ? '' : 'form-control-' + this.options.size) + ' ' + this.options.inputClass + '" placeholder="'+ this.options.placeholder + '" title="'+ this.options.inputTitle +'" disabled> ';
 			} else {
 				return '';
 			}
@@ -398,6 +406,7 @@
 		'text' : 'Choose file',
 		'htmlIcon' : '',
 		'btnClass' : 'btn-secondary',
+		'inputClass' : '',
 		'size' : 'nr',
 		'input' : true,
 		'badge' : false,
@@ -426,6 +435,7 @@
 				'size' : $this.attr('data-size'),
 				'text' : $this.attr('data-text'),
 				'btnClass' : $this.attr('data-btnClass'),
+				'inputClass' : $this.attr('data-inputClass'),
 				'badge' : $this.attr('data-badge') === 'true',
 				'dragdrop' : $this.attr('data-dragdrop') !== 'false',
 				'useLabel' : $this.attr('data-useLabel') !== 'false',
