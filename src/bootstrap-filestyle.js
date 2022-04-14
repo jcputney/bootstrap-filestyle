@@ -3,8 +3,8 @@
  * doc: http://jcputney.github.io/bootstrap-filestyle/
  * github: https://github.com/jcputney/bootstrap-filestyle
  *
- * Copyright (c) 2017 Markus Vinicius da Silva Lima
- * Version 2.1.3
+ * Copyright (c) 2022 Jonathan Putney
+ * Version 2.1.4
  * Licensed under the MIT license.
  */
 (function($) {
