@@ -1,6 +1,6 @@
 {
   "name": "bootstrap4-filestyle",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Bootstrap 4 FileStyle is a quick and simple plugin to help style your form's file upload inputs using Bootstrap 4.",
   "main": "src/bootstrap-filestyle.js",
   "directories": {
