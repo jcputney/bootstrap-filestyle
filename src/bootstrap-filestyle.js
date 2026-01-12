@@ -278,7 +278,9 @@
 
 			_self.$elementFilestyle.find(_self.options.buttonBefore ? '.filestyle-button' : ':input').css({
 				'border-top-left-radius': '.25rem',
-				'border-bottom-left-radius': '.25rem'
+				'border-bottom-left-radius': '.25rem',
+				'border-top-right-radius': '0',
+				'border-bottom-right-radius': '0'
 			});
 
 			_self.$elementFilestyle.find('[name="filedrag"]').css({
